@@ -1,3 +1,5 @@
+
+
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView
@@ -55,3 +57,4 @@ class RegisterView(CreateView):
         context = {}
         context['form'] = form
         return self.render_to_response(context)
+
