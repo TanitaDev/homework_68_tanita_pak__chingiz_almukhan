@@ -1,8 +1,9 @@
-
-
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView
+
+from accounts.forms import LoginForm, CustomUserCreationForm
+from accounts.models import Profile
 
 
 class LoginView(TemplateView):
@@ -17,23 +18,23 @@ class LoginView(TemplateView):
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST)
         if not form.is_valid():
-            return redirect('login')
+            return redirect('main')
         password = form.cleaned_data.get('password')
         if '@' not in form.cleaned_data.get('email'):
             phone = form.cleaned_data.get('email')
-            email = User.objects.filter(username=phone).values('email')
+            email = Profile.objects.filter(phone_number=phone).values('email')
             if len(email) == 0:
-                return redirect('login')
-            username_str = email[0]
-            user = authenticate(request, username=username_str.get('username'), password=password)
+                return redirect('main')
+            email_str = email[0]
+            user = authenticate(request, email=email_str.get('email'), password=password)
             if not user:
-                return redirect('login')
+                return redirect('main')
             login(request, user)
-            return redirect('main')
+            return redirect('ready')
         email = form.cleaned_data.get('email')
         user = authenticate(request, email=email, password=password)
         if not user:
-            return redirect('login')
+            return redirect('main')
         login(request, user)
         return redirect('main')
 
