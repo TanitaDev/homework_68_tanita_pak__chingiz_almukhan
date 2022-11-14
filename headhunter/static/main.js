@@ -23,6 +23,21 @@ let closeLogin = document.getElementById('closeLogin')
 closeLogin.onclick = function() {
     loginModal.style.display = "none";
   }
+
+let employer = document.getElementById('id_user_role_0')
+let applicant = document.getElementById('id_user_role_1')
+
+let nameLabel = document.getElementsByClassName('form-label')[0]
+
+employer.onclick = function () {
+    nameLabel.textContent = 'Имя компании'
+}
+
+applicant.onclick = function () {
+    nameLabel.textContent = 'Имя'
+}
+
+
 //         let label = $('.form-label');
 //         let mb = $('.mb-3');
 //         let btn = $('.btn');

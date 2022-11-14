@@ -11,15 +11,15 @@ class LoginForm(forms.Form):
 
 
 class CustomUserCreationForm(forms.ModelForm):
-    username = forms.CharField(min_length=5, max_length=50,
+    username = forms.CharField(label='Имя', min_length=5, max_length=50,
                                widget=forms.TextInput(attrs={'placeholder': 'Имя', 'class': 'form-control'}))
-    email = forms.CharField(min_length=7, max_length=70, required=True,
+    email = forms.CharField(label='Email', min_length=7, max_length=70, required=True,
                             widget=forms.EmailInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
-    avatar = forms.ImageField(required=False)
+    avatar = forms.ImageField(label='Аватар', required=False)
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True,
                                        widget=forms.PasswordInput)
-    user_role = forms.ChoiceField(label='Роль', choices=ROLE, widget=forms.RadioSelect())
+    user_role = forms.ChoiceField(label='Роль', choices=ROLE, widget=forms.RadioSelect(attrs={'class': "choose_role_block"}))
 
     class Meta:
         model = get_user_model()

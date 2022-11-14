@@ -3,7 +3,7 @@ from django.db import models
 
 from accounts.managers import UserManager
 
-ROLE = (('Employer', 'Работодатель'), ('Employee', 'Сотрудник'))
+ROLE = (('Employer', 'Работодатель'), ('Employee', 'Соискатель'))
 
 
 class Profile(AbstractUser):
