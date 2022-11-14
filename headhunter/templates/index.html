@@ -59,7 +59,6 @@
                                     <ul id="navigation">
                                         <li><a href="index.html">Home</a></li>
                                         <li><a href="#">Find a Jobs </a></li>
-                                        <li><a href="#">About</a></li>
                                         <li><a href="#">Page</a>
                                             <ul class="submenu">
                                                 <li><a href="#">Blog</a></li>
@@ -74,8 +73,13 @@
                             </div>
                             <!-- Header-btn -->
                             <div class="header-btn d-none f-right d-lg-block">
+                                {% if user.is_authenticated %}
+                                <b>Вы вошли в систему {{ user.username }}</b>
+                                <a class="btn head-btn1" href="{% url 'logout' %}">Выйти</a>
+                                {% else %}
                                 <button id="register_button" class="btn head-btn1">Register</button>
                                 <button id="login_button" class="btn head-btn2">Login</button>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
