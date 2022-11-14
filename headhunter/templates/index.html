@@ -67,7 +67,6 @@
                                                 <li><a href="#">job Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -141,6 +140,7 @@
         <div class="modal-content"
              style="background-color: white; margin: 10% auto; padding: 20px; width: 80%; border: 1px solid#888">
             <div>
+                <h4 class="register_title">Регистрация <span id="modalRegisterClose" class="close">&times;</span></h4>
                 <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form">
@@ -155,11 +155,13 @@
         <div class="modal-content"
              style="background-color: white; margin: 10% auto; padding: 20px; width: 80%; border: 1px solid#888">
             <div>
+                <h5>Вход <span id="closeLogin" class="close">&times;</span></h5>
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="form">
                         {% bootstrap_form login_form %}
                         {% bootstrap_button button_type="submit" content='Войти' %}
+
                     </div>
                 </form>
             </div>

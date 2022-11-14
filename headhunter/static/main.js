@@ -11,6 +11,18 @@ window.addEventListener('load', function() {
         login[0].style.display = "block";
     });
     });
+
+let registerModal = document.getElementById('registerModal')
+let closeRegister = document.getElementById('modalRegisterClose')
+closeRegister.onclick = function() {
+    registerModal.style.display = "none";
+  }
+
+let loginModal = document.getElementById('loginModal')
+let closeLogin = document.getElementById('closeLogin')
+closeLogin.onclick = function() {
+    loginModal.style.display = "none";
+  }
 //         let label = $('.form-label');
 //         let mb = $('.mb-3');
 //         let btn = $('.btn');
