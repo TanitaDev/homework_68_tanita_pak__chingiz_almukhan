@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.urls import reverse
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 
-from accounts.forms import LoginForm, CustomUserCreationForm
+from accounts.forms import LoginForm, CustomUserCreationForm, UserChangeForm
 from accounts.models import Profile
 
 
@@ -66,3 +67,22 @@ class EmployerDetailView(LoginRequiredMixin, DetailView):
     template_name = "employer_profile.html"
     context_object_name = 'user_obj'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['change_form'] = UserChangeForm(instance=self.object)
+        return context
+
+
+class UserChangeView(UpdateView):
+    model = get_user_model()
+    form_class = UserChangeForm
+    template_name = 'employer_profile.html'
+    context_object_name = 'user_obj'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['change_form'] = UserChangeForm(instance=self.object)
+        return context
+
+    def get_success_url(self):
+        return reverse('employer_profile', kwargs={'pk': self.object.pk})

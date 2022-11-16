@@ -39,6 +39,13 @@ applicant.onclick = function () {
 }
 
 
+$(document).ready(function() {
+    $("#create-book").modalForm({
+        formURL: "{% url 'create_book' %}"
+    });
+});
+
+
 //         let label = $('.form-label');
 //         let mb = $('.mb-3');
 //         let btn = $('.btn');
