@@ -25,7 +25,6 @@
             <h4 class="register_title">Редактировать профиль<span id="modalRegisterClose"
                                                                   class="close">&times;</span>
             </h4>
-
             <form action="{% url 'user_update' user_obj.pk %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <form action="{{ action_url }}" method="{{ form_method }}" enctype="{{ enctype }}">
