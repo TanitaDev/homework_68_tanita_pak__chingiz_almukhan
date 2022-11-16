@@ -6,3 +6,7 @@
     z-index: 1;
     overflow: auto;
 }
+
+.profile_display {
+    padding: 50px 0px 0px 0px;
+}

@@ -6,3 +6,7 @@
     z-index: 1;
     overflow: auto;
 }
+
+.register_title {
+    maring-bottom: 10px;
+}

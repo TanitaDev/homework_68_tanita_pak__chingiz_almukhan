@@ -11,6 +11,34 @@ window.addEventListener('load', function() {
         login[0].style.display = "block";
     });
     });
+
+let registerModal = document.getElementById('registerModal')
+let closeRegister = document.getElementById('modalRegisterClose')
+closeRegister.onclick = function() {
+    registerModal.style.display = "none";
+  }
+
+let loginModal = document.getElementById('loginModal')
+let closeLogin = document.getElementById('closeLogin')
+closeLogin.onclick = function() {
+    loginModal.style.display = "none";
+  }
+
+
+let employer = document.getElementById('id_user_role_0')
+let applicant = document.getElementById('id_user_role_1')
+
+let nameLabel = document.getElementsByClassName('form-label')[0]
+
+employer.onclick = function () {
+    nameLabel.textContent = 'Название компании'
+}
+
+applicant.onclick = function () {
+    nameLabel.textContent = 'Имя'
+}
+
+
 //         let label = $('.form-label');
 //         let mb = $('.mb-3');
 //         let btn = $('.btn');
