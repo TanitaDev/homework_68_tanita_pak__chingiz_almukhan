@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.urls import reverse
+from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 
-from accounts.forms import LoginForm, CustomUserCreationForm
+from accounts.forms import LoginForm, CustomUserCreationForm, UserChangeForm
 from accounts.models import Profile
-from core.models import Resume
 
 
 class LoginView(TemplateView):
@@ -32,7 +32,7 @@ class LoginView(TemplateView):
             if not user:
                 return redirect('main')
             login(request, user)
-            return redirect('main')
+            return redirect('ready')
         email = form.cleaned_data.get('email')
         user = authenticate(request, email=email, password=password)
         if not user:
@@ -64,12 +64,25 @@ class RegisterView(CreateView):
 
 class EmployerDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
-    template_name = "employer_profile1.html"
+    template_name = "employer_profile.html"
     context_object_name = 'user_obj'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.get_object()
-        context['resumes'] = Resume.objects.filter(author=user)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['change_form'] = UserChangeForm(instance=self.object)
         return context
 
+
+class UserChangeView(UpdateView):
+    model = get_user_model()
+    form_class = UserChangeForm
+    template_name = 'employer_profile.html'
+    context_object_name = 'user_obj'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['change_form'] = UserChangeForm(instance=self.object)
+        return context
+
+    def get_success_url(self):
+        return reverse('employer_profile', kwargs={'pk': self.object.pk})

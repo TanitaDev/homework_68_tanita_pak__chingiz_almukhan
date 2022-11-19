@@ -1,3 +1,9 @@
 from django.contrib import admin
+from core.models import Vacancy
 
-# Register your models here.
+
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+
+admin.site.register(Vacancy, VacancyAdmin)
