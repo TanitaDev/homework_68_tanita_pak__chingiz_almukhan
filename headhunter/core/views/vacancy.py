@@ -1,5 +1,5 @@
 from django.urls import reverse
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 from core.forms import VacancyForm
 from core.models import Vacancy
