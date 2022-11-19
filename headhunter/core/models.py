@@ -1,35 +1,37 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 
+from accounts.models import Profile
 
-class Vacancy(models.Model):
-    IT = 'IT'
-    DES = 'DESIGN'
-    MAN = 'MANAGEMENT'
-    MED = 'MEDICINE'
-    ENG = 'ENGINEERING'
-    ART = 'ART'
-    TRS = 'TRANSPORT'
-    MRK = 'MARKETING'
-    TRD = 'TRADE'
-    ECN = 'ECONOMY'
-    CATEGORY_CHOICES = [
-        (IT, 'IT'),
-        (DES, 'Дизайн'),
-        (MAN, 'Менеджмент'),
-        (MED, 'Медицина'),
-        (ENG, 'Инженерное дело'),
-        (ART, 'Искусство'),
-        (TRS, 'Транспорт'),
-        (MRK, 'Маркетинг'),
-        (TRD, 'Торговля'),
-        (ECN, 'Экономика')
-    ]
+CATEGORY = (('IT', 'IT'), ('Management', 'Менеджмент'), ('Audit', 'Аудит'), ('HR', 'HR'))
 
-    name = models.CharField(max_length=200, verbose_name='Название вакансии', null=False, blank=False)
-    salary = models.DecimalField(verbose_name='Заработная плата', decimal_places=1, max_digits=10, null=False,
-                                 blank=False)
-    description = models.TextField(max_length=3000, verbose_name='Описание вакансии', null=False, blank=False)
-    experience = models.FloatField(verbose_name='Опыт работы', null=False, blank=False)
-    category = models.TextField(verbose_name='Категория вакансии', null=False, blank=False, choices=CATEGORY_CHOICES,
-                                default=IT)
+
+class Resume(models.Model):
+    category = models.TextField(verbose_name='Категория вакансии', choices=CATEGORY, null=False, blank=False)
+    about = models.TextField(max_length=500, verbose_name='О себе')
+    salary = models.DecimalField(verbose_name='Желаемая зарплата')
+    applicant = models.ForeignKey(Profile, verbose_name='Соискатель', on_delete=models.CASCADE)
+    updated_at = models.DateField(verbose_name='Последние изменение', auto_now=True)
+    is_active = models.BooleanField(verbose_name='Скрыть резюме', default=False, null=False)
+    telegram = models.CharField(verbose_name='Ссылка на телеграм', max_length=100, null=True, blank=True)
+    linkedin = models.CharField(verbose_name='Ссылка на Linkedin', max_length=100, null=True, blank=True)
+    facebook = models.CharField(verbose_name='Ссылка на Facebook', max_length=100, null=True, blank=True)
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True
+        self.save()
+
+
+class Education(models.Model):
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    study = models.CharField(max_length=100, verbose_name='Место обучения')
+    start_date = models.DateField(blank=True, null=True, verbose_name='Начал обучаться')
+    end_date = models.DateField(blank=True, null=True, verbose_name='Закончил обучаться')
+
+
+class Job(models.Model):
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    description = models.CharField(max_length=100, verbose_name='Обязанности')
+    company = models.CharField(max_length=100, verbose_name='Название компании')
+    start_date = models.DateField(blank=True, null=True, verbose_name='Начал работать')
+    end_date = models.DateField(blank=True, null=True, verbose_name='Закончил работать')
+
