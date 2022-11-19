@@ -10,3 +10,13 @@
 .profile_display {
     padding: 50px 0px 0px 0px;
 }
+
+.my_btn {
+    background-color: #d20a1100;
+}
+body {
+    font-family: Arial sans-serif;
+    background: white; !important;
+    color: #222;
+    margin-top: 0px;
+}

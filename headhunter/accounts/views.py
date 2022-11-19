@@ -5,6 +5,7 @@ from django.views.generic import TemplateView, CreateView, DetailView
 
 from accounts.forms import LoginForm, CustomUserCreationForm
 from accounts.models import Profile
+from core.models import Resume
 
 
 class LoginView(TemplateView):
@@ -31,7 +32,7 @@ class LoginView(TemplateView):
             if not user:
                 return redirect('main')
             login(request, user)
-            return redirect('ready')
+            return redirect('main')
         email = form.cleaned_data.get('email')
         user = authenticate(request, email=email, password=password)
         if not user:
@@ -63,6 +64,12 @@ class RegisterView(CreateView):
 
 class EmployerDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
-    template_name = "employer_profile.html"
+    template_name = "employer_profile1.html"
     context_object_name = 'user_obj'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['resumes'] = Resume.objects.filter(author=user)
+        return context
 

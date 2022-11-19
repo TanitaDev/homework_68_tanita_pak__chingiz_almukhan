@@ -7,5 +7,6 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('logout/', logout_view, name='logout'),
     # path('employer/profile/<int:pk>', EmployerDetailView.as_view(), name='employer_profile'),
-    path('profile/<int:pk>', EmployerDetailView.as_view(template_name='employer_profile.html'), name='employer_profile')
+    path('profile/<int:pk>', EmployerDetailView.as_view(template_name='employer_profile1.html'), name='employer_profile'),
+
 ]
