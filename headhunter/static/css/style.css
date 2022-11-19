@@ -20,3 +20,19 @@ body {
     color: #222;
     margin-top: 0;
 }
+
+.udated_vacancy {
+    margin: 10px 0px 0px 0px;
+}
+
+.btn__block {
+    display: flex;
+    justify-content: center;
+}
+
+.btn__block a {
+  display: inline-block;
+  max-height: 45px;
+  margin: 0px 5px;
+  padding: 0 25px;
+}

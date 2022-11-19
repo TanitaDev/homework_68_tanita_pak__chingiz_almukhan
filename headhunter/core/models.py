@@ -58,3 +58,4 @@ class Vacancy(models.Model):
     description = models.TextField(max_length=3000, verbose_name='Описание вакансии', null=False, blank=False)
     experience = models.FloatField(verbose_name='Опыт работы', null=False, blank=False)
     category = models.TextField(verbose_name='Категория вакансии', null=False, blank=False, choices=CATEGORY)
+    updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления')

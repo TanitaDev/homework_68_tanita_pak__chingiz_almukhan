@@ -25,3 +25,10 @@ class VacancyUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('employer_profile', kwargs={'pk': self.object.pk})
+
+
+class VacancyDetail(DetailView):
+    template_name = "vacancy_detail.html"
+    model = Vacancy
+    context_object_name = "vacancy"
+
