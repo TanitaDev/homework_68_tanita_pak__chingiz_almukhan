@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
-from accounts.models import ROLE, Profile
+from accounts.models import ROLE
 
 
 class LoginForm(forms.Form):

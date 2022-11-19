@@ -5,7 +5,7 @@ from .models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['id', 'username']
+    list_display = ['username']
 
 
 admin.site.register(Profile, ProfileAdmin)

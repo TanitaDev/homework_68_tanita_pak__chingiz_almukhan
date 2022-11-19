@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'core',
-    "django_bootstrap5",
-    'bootstrap_modal_forms'
+    "django_bootstrap5"
 ]
 
 MIDDLEWARE = [

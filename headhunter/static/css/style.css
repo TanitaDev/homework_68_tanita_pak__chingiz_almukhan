@@ -11,14 +11,12 @@
     padding: 50px 0px 0px 0px;
 }
 
-.vacancy_link {
-    color: #000000;
+.my_btn {
+    background-color: #d20a1100;
 }
-
-.btn__div .btn {
-    margin-top: 15px;
-}
-
-.vacancy_block {
-    margin-top: 20px;
+body {
+    font-family: Arial sans-serif;
+    background: white; !important;
+    color: #222;
+    margin-top: 0;
 }

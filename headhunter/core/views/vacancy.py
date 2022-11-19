@@ -10,6 +10,10 @@ class VacancyCreate(CreateView):
     form_class = VacancyForm
     model = Vacancy
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse('employer_profile', kwargs={'pk': self.object.pk})
 

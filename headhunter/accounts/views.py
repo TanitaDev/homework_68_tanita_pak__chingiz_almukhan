@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, CreateView, DetailView, UpdateVie
 
 from accounts.forms import LoginForm, CustomUserCreationForm, UserChangeForm
 from accounts.models import Profile
+from core.models import Resume, Vacancy
 
 
 class LoginView(TemplateView):
@@ -32,7 +33,7 @@ class LoginView(TemplateView):
             if not user:
                 return redirect('main')
             login(request, user)
-            return redirect('ready')
+            return redirect('main')
         email = form.cleaned_data.get('email')
         user = authenticate(request, email=email, password=password)
         if not user:
@@ -46,10 +47,9 @@ def logout_view(request):
     return redirect('main')
 
 
-class RegisterView(CreateView):
+class RegisterView(TemplateView):
     template_name = 'register.html'
     form_class = CustomUserCreationForm
-    success_url = '/'
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
@@ -57,9 +57,9 @@ class RegisterView(CreateView):
             user = form.save()
             login(request, user)
             return redirect('main')
-        context = {}
-        context['form'] = form
-        return self.render_to_response(context)
+        # context = {}
+        # context['form'] = form
+        return redirect('main')
 
 
 class EmployerDetailView(LoginRequiredMixin, DetailView):
@@ -67,8 +67,11 @@ class EmployerDetailView(LoginRequiredMixin, DetailView):
     template_name = "employer_profile.html"
     context_object_name = 'user_obj'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['resumes'] = Resume.objects.filter(author=user)
+        context['vacancy'] = Vacancy.objects.filter(author=user)
         context['change_form'] = UserChangeForm(instance=self.object)
         return context
 
@@ -78,11 +81,6 @@ class UserChangeView(UpdateView):
     form_class = UserChangeForm
     template_name = 'employer_profile.html'
     context_object_name = 'user_obj'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        context['change_form'] = UserChangeForm(instance=self.object)
-        return context
 
     def get_success_url(self):
         return reverse('employer_profile', kwargs={'pk': self.object.pk})
