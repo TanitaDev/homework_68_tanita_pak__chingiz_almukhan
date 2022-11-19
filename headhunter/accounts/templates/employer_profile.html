@@ -14,7 +14,11 @@
                 <p class="user_mail">Мобильный телефон: <b>{{ user_obj.phone_number }}</b></p>
                 <p class="user_mail">Роль: <b>{{ user_obj.get_user_role_display }}</b></p>
             </div>
+            <div class="vacancy__block">
+
+            </div>
             <button id="register_button" class="btn head-btn1">Редактировать</button>
+            <a class="vacancy_link" href="{% url 'vacancy_create' %}">Создать вакансию</a>
         </div>
     </div>
 </div>
