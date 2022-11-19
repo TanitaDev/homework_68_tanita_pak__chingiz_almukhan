@@ -1,4 +1,3 @@
-
 from django.db import models
 
 from accounts.models import Profile
@@ -35,3 +34,4 @@ class Job(models.Model):
     company = models.CharField(max_length=100, verbose_name='Название компании')
     start_date = models.DateField(blank=True, null=True, verbose_name='Начал работать')
     end_date = models.DateField(blank=True, null=True, verbose_name='Закончил работать')
+

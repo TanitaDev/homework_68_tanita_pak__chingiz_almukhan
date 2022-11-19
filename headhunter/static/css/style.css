@@ -10,3 +10,15 @@
 .profile_display {
     padding: 50px 0px 0px 0px;
 }
+
+.vacancy_link {
+    color: #000000;
+}
+
+.btn__div .btn {
+    margin-top: 15px;
+}
+
+.vacancy_block {
+    margin-top: 20px;
+}

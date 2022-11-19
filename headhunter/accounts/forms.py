@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
-from accounts.models import ROLE
+from accounts.models import ROLE, Profile
 
 
 class LoginForm(forms.Form):
@@ -43,4 +43,5 @@ class CustomUserCreationForm(forms.ModelForm):
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('username', 'phone_number', 'email', 'avatar')
+        fields = ['email', 'phone_number', 'user_role', 'avatar']
+        labels = {'email': 'Email', 'phone_number': 'Номер телефона', 'role': 'Роль', 'avatar': 'Аватар'}
