@@ -54,7 +54,7 @@
                 <h5 class="card-title">{{ vacancy.name }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ vacancy.get_category_display }}</h6>
                 <div class="btn__block">
-                    <a href="/vacancy/2" class="genric-btn primary circle">Подробнее</a>
+                    <a href="{% url 'vacancy_detail' vacancy.pk %}" class="genric-btn primary circle">Подробнее</a>
                     {% if perms.core.change_vacancy or vacancy.author == request.user %}
                     <a href="{% url 'vacancy_update'  vacancy.pk %}" class="genric-btn primary circle">Редактировать</a>
                     {% endif %}
