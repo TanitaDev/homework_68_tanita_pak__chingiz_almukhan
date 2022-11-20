@@ -59,7 +59,7 @@
                     <a href="{% url 'vacancy_update'  vacancy.pk %}" class="genric-btn primary circle">Редактировать</a>
                     {% endif %}
                 </div>
-                <p class="udated_vacancy">
+                <p class="udated_vacancy mt-1">
                     Обновлено: <span>{{ vacancy.updated_at }}</span>
                     {% if perms.core.change_vacancy or vacancy.author == request.user %}
                     <a class="reload_btn" href="{% url 'reload' vacancy.pk %}">Обновить <i class="fa-solid fa-rotate"></i></a>
