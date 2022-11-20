@@ -45,4 +45,4 @@ def vacancy_reload(request, *args, **kwargs):
     vacancy.updated_at = timezone.now()
     vacancy.save()
 
-    return redirect('employer_profile', pk=vacancy.author_id)
+    return redirect('vacancy_detail', pk=kwargs['pk'])

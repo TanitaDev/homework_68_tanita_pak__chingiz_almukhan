@@ -19,7 +19,8 @@ class CustomUserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True,
                                        widget=forms.PasswordInput)
-    user_role = forms.ChoiceField(label='Роль', choices=ROLE, widget=forms.RadioSelect(attrs={'class': "choose_role_block"}))
+    user_role = forms.ChoiceField(label='Роль', choices=ROLE,
+                                  widget=forms.RadioSelect(attrs={'class': "choose_role_block"}))
 
     class Meta:
         model = get_user_model()

@@ -52,7 +52,7 @@
             {% for vacancy in vacancies %}
             <div class="card-body">
                 <h5 class="card-title">{{ vacancy.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ vacancy.get_category_display }}</h6>
+                <h6 class="card-subtitle mb-3 text-muted">{{ vacancy.get_category_display }}</h6>
                 <div class="btn__block">
                     <a href="{% url 'vacancy_detail' vacancy.pk %}" class="genric-btn primary circle">Подробнее</a>
                     {% if perms.core.change_vacancy or vacancy.author == request.user %}
@@ -61,9 +61,6 @@
                 </div>
                 <p class="udated_vacancy mt-1">
                     Обновлено: <span>{{ vacancy.updated_at }}</span>
-                    {% if perms.core.change_vacancy or vacancy.author == request.user %}
-                    <a class="reload_btn" href="{% url 'reload' vacancy.pk %}">Обновить <i class="fa-solid fa-rotate"></i></a>
-                    {% endif %}
                 </p>
             </div>
             {% endfor %}

@@ -12,10 +12,11 @@ urlpatterns = [
     path('resume/<int:pk>/add_education', AddEducation.as_view(), name='add_education'),
     path('resume/<int:pk>/', ResumeDetailView.as_view(), name='resume_detail'),
     path('resume/<int:pk>/add_job', AddJob.as_view(), name='add_job'),
+    path('resume/update/<int:pk>', update_resume, name='update'),
+    path('resume/download/<int:pk>', download_pdf, name='download'),
+
     path('vacancy/create', VacancyCreate.as_view(), name='vacancy_create'),
     path('vacancy/update/<int:pk>', VacancyUpdate.as_view(), name='vacancy_update'),
     path('vacancy/<int:pk>', VacancyDetail.as_view(), name='vacancy_detail'),
-    path('resume/update/<int:pk>', update_resume, name='update'),
     path('vacancy/reload/<int:pk>', vacancy_reload, name='reload'),
-    path('resume/download/<int:pk>', download_pdf, name='download'),
 ]

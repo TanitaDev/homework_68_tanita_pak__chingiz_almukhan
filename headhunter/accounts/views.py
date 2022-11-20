@@ -57,8 +57,6 @@ class RegisterView(TemplateView):
             user = form.save()
             login(request, user)
             return redirect('main')
-        # context = {}
-        # context['form'] = form
         return redirect('main')
 
 
