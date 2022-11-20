@@ -34,6 +34,9 @@ class Resume(models.Model):
         self.is_active = True
         self.save()
 
+    def __str__(self):
+        return f'{self.author}'
+
 
 class Education(models.Model):
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
