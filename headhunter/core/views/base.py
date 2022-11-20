@@ -5,7 +5,7 @@ from django.views.generic import ListView
 
 from accounts.forms import CustomUserCreationForm, LoginForm
 from accounts.models import Profile
-from core.models import Resume
+from core.models import Resume, Vacancy
 
 
 class IndexView(ListView):
@@ -17,6 +17,7 @@ class IndexView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['register_form'] = CustomUserCreationForm()
         context['login_form'] = LoginForm()
+        context['vacancies'] = Vacancy.objects.filter(is_active=False).order_by('-updated_at')
         return context
 
 

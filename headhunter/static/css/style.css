@@ -49,3 +49,20 @@ body {
     font-size: 15px;
     padding-left: 10px;
 }
+
+.wrapper {
+    padding-bottom: 50px;
+}
+
+.vacancies_list_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.vacancies_list_block .card-body {
+    min-width: 350px;
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+    margin: 17px 12px;
+    max-width: 450px;
+}
