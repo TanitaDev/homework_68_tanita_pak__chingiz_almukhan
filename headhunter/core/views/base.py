@@ -1,7 +1,11 @@
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
+from django.utils import timezone
 from django.views.generic import ListView
 
 from accounts.forms import CustomUserCreationForm, LoginForm
 from accounts.models import Profile
+from core.models import Resume
 
 
 class IndexView(ListView):
@@ -14,3 +18,10 @@ class IndexView(ListView):
         context['register_form'] = CustomUserCreationForm()
         context['login_form'] = LoginForm()
         return context
+
+
+def update_resume(request, *args, **kwargs):
+    resume = get_object_or_404(Resume, pk=kwargs['pk'])
+    resume.updated_at = timezone.now()
+    resume.save()
+    return redirect('employer_profile', pk=resume.author_id)

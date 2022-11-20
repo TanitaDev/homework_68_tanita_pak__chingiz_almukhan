@@ -70,7 +70,7 @@ class EmployerDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
-        context['resumes'] = Resume.objects.filter(author=user)
+        context['resumes'] = Resume.objects.filter(author=user).order_by('-updated_at')
         context['vacancy'] = Vacancy.objects.filter(author=user)
         context['change_form'] = UserChangeForm(instance=self.object)
         return context
