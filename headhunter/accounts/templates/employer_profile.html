@@ -55,7 +55,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{v.name}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{v.category}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{v.get_category_display}}</h6>
                             <div class="btn__block">
                                 <a href="{% url 'vacancy_detail' v.pk %}"
                                    class="genric-btn primary circle">Подробнее</a>

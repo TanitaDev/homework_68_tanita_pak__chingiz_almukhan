@@ -68,4 +68,4 @@ class JobAddEditForm(forms.ModelForm):
 class VacancyForm(forms.ModelForm):
     class Meta:
         model = Vacancy
-        fields = ['name', 'salary', 'description', 'experience', 'category']
+        fields = ['name', 'salary', 'description', 'experience', 'category', 'is_active']

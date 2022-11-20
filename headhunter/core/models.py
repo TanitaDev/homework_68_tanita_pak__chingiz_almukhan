@@ -59,3 +59,4 @@ class Vacancy(models.Model):
     experience = models.FloatField(verbose_name='Опыт работы', null=False, blank=False)
     category = models.TextField(verbose_name='Категория вакансии', null=False, blank=False, choices=CATEGORY)
     updated_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата обновления')
+    is_active = models.BooleanField(verbose_name='Скрыть вакансию', default=False)

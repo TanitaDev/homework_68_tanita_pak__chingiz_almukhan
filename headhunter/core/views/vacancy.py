@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
@@ -33,6 +34,10 @@ class VacancyDetail(DetailView):
     template_name = "vacancy_detail.html"
     model = Vacancy
     context_object_name = "vacancy"
+
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        vacancy = get_object_or_404(Vacancy, pk=pk)
 
 
 def vacancy_reload(request, *args, **kwargs):
