@@ -1,4 +1,6 @@
 from django.urls import reverse
+from django.shortcuts import get_object_or_404, redirect
+from django.utils import timezone
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 from core.forms import VacancyForm
@@ -32,3 +34,10 @@ class VacancyDetail(DetailView):
     model = Vacancy
     context_object_name = "vacancy"
 
+
+def vacancy_reload(request, *args, **kwargs):
+    vacancy = get_object_or_404(Vacancy, pk=kwargs['pk'])
+    vacancy.updated_at = timezone.now()
+    vacancy.save()
+
+    return redirect('employer_profile', pk=vacancy.author_id)

@@ -4,12 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="vacancy_block">
-            <h3 class="mt-3">Вакансия: <b>{{vacancy.name}}</b></h3>
+            <h3 class="mt-3 vacancy_title">Вакансия: <b>{{vacancy.name}}</b></h3>
             <p>Зарплата: <b>{{ vacancy.salary }} тг</b></p>
             <p>Описание вакансии: <b>{{ vacancy.description }} </b></p>
             <p>Требуемый опыт работы: <b>{{ vacancy.experience }} </b></p>
             <p>Категория вакансии: <b>{{ vacancy.category }} </b></p>
-            <p>Обновлена: <b>{{ vacancy.updated_at }} </b></p>
+            <p class="reload_p">Обновлена: <b>{{ vacancy.updated_at }} </b> <a class="reload_btn" href="{% url 'reload' vacancy.pk %}">Обновить <i class="fa-solid fa-rotate"></i></a></p>
             <div class="vacancy_link_block">
                 <a href="{% url 'vacancy_update' vacancy.pk %}" class="genric-btn primary circle">Редактировать</a>
             </div>

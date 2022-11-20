@@ -40,3 +40,12 @@ body {
 .btn__div {
     margin-top: 10px;
 }
+
+.reload_btn {
+    color: #000000 !important;
+}
+
+.reload_p .reload_btn{
+    font-size: 15px;
+    padding-left: 10px;
+}

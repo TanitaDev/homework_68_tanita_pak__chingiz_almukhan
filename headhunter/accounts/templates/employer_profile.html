@@ -43,8 +43,6 @@
                 </div>
             </div>
             {% endfor %}
-
-
         </div>
     </div>
     {% else %}
@@ -59,11 +57,13 @@
                             <h5 class="card-title">{{v.name}}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{v.category}}</h6>
                             <div class="btn__block">
-                                <a href="{% url 'vacancy_detail' v.pk %}" class="genric-btn primary circle">Подробнее</a>
+                                <a href="{% url 'vacancy_detail' v.pk %}"
+                                   class="genric-btn primary circle">Подробнее</a>
                                 <a href="{% url 'vacancy_update' v.pk %}" class="genric-btn primary circle">Редактировать</a>
                             </div>
                             <p class="udated_vacancy">
                                 Обновлено: <span>{{ v.updated_at }}</span>
+                                <a class="reload_btn" href="{% url 'reload' v.pk %}">Обновить <i class="fa-solid fa-rotate"></i></a>
                             </p>
                         </div>
                     </div>
