@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.http import Http404
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, redirect
@@ -21,13 +22,16 @@ class VacancyCreate(CreateView):
         return reverse('employer_profile', kwargs={'pk': self.object.pk})
 
 
-class VacancyUpdate(UpdateView):
+class VacancyUpdate(UserPassesTestMixin, UpdateView):
     template_name = "vacancy_update.html"
     form_class = VacancyForm
     model = Vacancy
 
+    def test_func(self):
+        return self.get_object().author == self.request.user or self.request.user.has_perm('core.change_vacancy')
+
     def get_success_url(self):
-        return reverse('employer_profile', kwargs={'pk': self.object.pk})
+        return reverse('vacancy_detail', kwargs={'pk': self.object.pk})
 
 
 class VacancyDetail(DetailView):

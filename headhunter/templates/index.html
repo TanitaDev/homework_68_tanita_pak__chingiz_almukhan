@@ -55,12 +55,15 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{ vacancy.get_category_display }}</h6>
                 <div class="btn__block">
                     <a href="/vacancy/2" class="genric-btn primary circle">Подробнее</a>
-                    <!--                    {% if user.is_authenticated %}-->
-                    <!--                    <a href="/vacancy/update/2" class="genric-btn primary circle">Редактировать</a>-->
-                    <!--                    {% endif %}-->
+                    {% if perms.core.change_vacancy or vacancy.author == request.user %}
+                    <a href="{% url 'vacancy_update'  vacancy.pk %}" class="genric-btn primary circle">Редактировать</a>
+                    {% endif %}
                 </div>
                 <p class="udated_vacancy">
                     Обновлено: <span>{{ vacancy.updated_at }}</span>
+                    {% if perms.core.change_vacancy or vacancy.author == request.user %}
+                    <a class="reload_btn" href="{% url 'reload' vacancy.pk %}">Обновить <i class="fa-solid fa-rotate"></i></a>
+                    {% endif %}
                 </p>
             </div>
             {% endfor %}
