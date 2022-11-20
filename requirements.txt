@@ -8,3 +8,4 @@ Pillow==9.3.0
 pytz==2022.6
 soupsieve==2.3.2.post1
 sqlparse==0.4.3
+weasyprint==57.1
