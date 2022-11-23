@@ -53,6 +53,7 @@
             <a href="{% url 'vacancy_detail' v.pk %}">
                 <div class="card-body">
                     <h5 class="card-title">{{ v.name }}</h5>
+                    <p>{{ v.category }}</p>
                     <p class="salary_text">{% load humanize %} {{ v.salary|intcomma }} KZT</p>
                     <p>Компания:
                         <a class="company_title" href="{% url 'employer_profile' v.author.pk %}">
@@ -67,7 +68,7 @@
             {% endfor %}
         </div>
         {% if page_obj.has_other_pages %}
-        <div class="paginate">
+        <div class="paginate mt-1">
             <nav>
                 <ul class="paginate_list">
                     {% if page_obj.has_previous %}

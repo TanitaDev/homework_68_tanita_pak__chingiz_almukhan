@@ -77,8 +77,22 @@ body {
     color: #000000;
 }
 
+
 .paginate_item_selected {
-    color: green;
+    color:  #1f2b7b;
+}
+
+.page_num a, .paginate_item {
+    border: 1px solid #ddd;
+    padding: 6px 14px;
+}
+
+.page_num a:hover {
+    color:  #1f2b7b;
+}
+
+.paginate_item:hover {
+    color:  #1f2b7b;
 }
 
 .paginate_list {
@@ -86,5 +100,14 @@ body {
 }
 
 .paginate_list li {
-    margin: 0px 5px;
+    margin: 0px 8px;
+}
+
+.paginate {
+    display: flex;
+    justify-content: center;
+}
+
+.company_title:hover {
+    color: #1f2b7b;
 }

@@ -19,4 +19,5 @@ urlpatterns = [
     path('vacancy/update/<int:pk>', VacancyUpdate.as_view(), name='vacancy_update'),
     path('vacancy/<int:pk>', VacancyDetail.as_view(), name='vacancy_detail'),
     path('vacancy/reload/<int:pk>', vacancy_reload, name='reload'),
+
 ]
