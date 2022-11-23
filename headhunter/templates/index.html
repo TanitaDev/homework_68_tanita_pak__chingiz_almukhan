@@ -43,28 +43,54 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row mt-4">
+<div class="container mt-4">
+    <div class="vacancy_container">
         <h3 class="vacancies_title">
             Вакансии
         </h3>
         <div class="vacancies_list_block">
-            {% for vacancy in vacancies %}
-            <div class="card-body">
-                <h5 class="card-title">{{ vacancy.name }}</h5>
-                <h6 class="card-subtitle mb-3 text-muted">{{ vacancy.get_category_display }}</h6>
-                <div class="btn__block">
-                    <a href="{% url 'vacancy_detail' vacancy.pk %}" class="genric-btn primary circle">Подробнее</a>
-                    {% if perms.core.change_vacancy or vacancy.author == request.user %}
-                    <a href="{% url 'vacancy_update'  vacancy.pk %}" class="genric-btn primary circle">Редактировать</a>
-                    {% endif %}
+            {% for v in vacancy %}
+            <a href="{% url 'vacancy_detail' v.pk %}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ v.name }}</h5>
+                    <p class="salary_text">{% load humanize %} {{ v.salary|intcomma }} KZT</p>
+                    <p>Компания:
+                        <a class="company_title" href="{% url 'employer_profile' v.author.pk %}">
+                            {{ v.author.username }}
+                        </a>
+                    </p>
+                    <p class="udated_vacancy mt-1">
+                        Опубликовано: <span><b>{{ v.updated_at|date:"d-m-Y H:i" }}</b></span>
+                    </p>
                 </div>
-                <p class="udated_vacancy mt-1">
-                    Обновлено: <span>{{ vacancy.updated_at }}</span>
-                </p>
-            </div>
+            </a>
             {% endfor %}
         </div>
+        {% if page_obj.has_other_pages %}
+        <div class="paginate">
+            <nav>
+                <ul class="paginate_list">
+                    {% if page_obj.has_previous %}
+                    <li class="page_num">
+                        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                    </li>
+                    {% endif %}
+                    {% for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                    <li><a class="paginate_item_selected" href="?page={{ p }}">{{ p }}</a></li>
+                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                    <li><a class="paginate_item" href="?page={{ p }}">{{ p }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page_num">
+                        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
