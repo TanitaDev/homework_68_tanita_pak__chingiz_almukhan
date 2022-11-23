@@ -23,16 +23,6 @@
                             <div class="input-form">
                                 <input type="text" placeholder="Job Tittle or keyword">
                             </div>
-                            <div class="select-form">
-                                <div class="select-itms">
-                                    <select name="select" id="select1">
-                                        <option value="">Location BD</option>
-                                        <option value="">Location PK</option>
-                                        <option value="">Location US</option>
-                                        <option value="">Location UK</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="search-form">
                                 <a href="#">Find job</a>
                             </div>
@@ -49,6 +39,7 @@
             Вакансии
         </h3>
         <div class="vacancies_list_block">
+            {% include 'partial/search.html' %}
             {% for v in vacancy %}
             <a href="{% url 'vacancy_detail' v.pk %}">
                 <div class="card-body">
@@ -67,31 +58,7 @@
             </a>
             {% endfor %}
         </div>
-        {% if page_obj.has_other_pages %}
-        <div class="paginate mt-1">
-            <nav>
-                <ul class="paginate_list">
-                    {% if page_obj.has_previous %}
-                    <li class="page_num">
-                        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-                    </li>
-                    {% endif %}
-                    {% for p in paginator.page_range %}
-                    {% if page_obj.number == p %}
-                    <li><a class="paginate_item_selected" href="?page={{ p }}">{{ p }}</a></li>
-                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
-                    <li><a class="paginate_item" href="?page={{ p }}">{{ p }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <li class="page_num">
-                        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-        {% endif %}
+        {% include 'partial/pagination.html' %}
     </div>
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.urls import path
 
 from core.views.add_resume_view import ResumeAddView, ResumeEditView, AddEducation, AddJob
+from core.views.api_views import vacancy_list_view
 from core.views.base import IndexView, update_resume
 from core.views.resume_detail import ResumeDetailView, download_pdf
 from core.views.vacancy import VacancyCreate, VacancyUpdate, VacancyDetail, vacancy_reload
@@ -20,4 +21,5 @@ urlpatterns = [
     path('vacancy/<int:pk>', VacancyDetail.as_view(), name='vacancy_detail'),
     path('vacancy/reload/<int:pk>', vacancy_reload, name='reload'),
 
+    path('api/vacancy', vacancy_list_view)
 ]

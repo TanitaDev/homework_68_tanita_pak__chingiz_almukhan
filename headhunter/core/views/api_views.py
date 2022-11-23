@@ -6,4 +6,6 @@ from core.models import Vacancy
 
 def vacancy_list_view(request, *args, **kwargs):
     if request.method == "GET":
-        return JsonResponse(serialize('json', Vacancy.objects.all()), safe=False)
+        search = request.GET.get('search')
+        print(search)
+        return JsonResponse(serialize('json', Vacancy.objects.filter(name__icontains=search)), safe=False)
