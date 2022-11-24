@@ -1,14 +1,14 @@
 let search = $("#id_search");
-let url = 'http://localhost:8000/api/vacancy?search='
+let url = 'api/vacancy?search='
 
 let addVacancy = function (vacancy, container) {
     container.append(
-        `<a href="http://localhost:8000/vacancy/${vacancy.id}">
+        `<a href="http://127.0.0.1:8000/vacancy/${vacancy.id}">
             <div class="card-body">
                 <h5 class="card-title">${vacancy.name}</h5>
                 <p class="salary_text">${vacancy.salary} KZT</p>
                 <p>Компания:
-                    <a class="company_title" href="http://localhost:8000/auth/profile/${vacancy.author}">
+                    <a class="company_title" href="http://127.0.0.1:8000//auth/profile/${vacancy.author}">
                         ${vacancy.author}
                     </a>
                 </p>
