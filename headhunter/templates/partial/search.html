@@ -19,17 +19,34 @@ let search = $("#id_search");
 let url = 'http://localhost:8000/api/vacancy?search='
 
 let addVacancy = function (vacancy, container) {
-    let div = document.createElement("div");
-    let name = document.createElement("h5");
-    name.innerText = `Name - ${vacancy.name}`;
-    let salary = document.createElement("p");
-    salary.innerText = `${vacancy.salary}`;
-    let company = document.createElement("a")
-    company.innerText = `${vacancy.company}`;
-    div.append(name);
-    div.append(salary);
-    div.append(company);
-    container.append(div);
+<!--    let div = document.createElement("div");-->
+<!--    let name = document.createElement("h5");-->
+<!--    name.innerText = `Name - ${vacancy.name}`;-->
+<!--    let salary = document.createElement("p");-->
+<!--    salary.innerText = `${vacancy.salary}`;-->
+<!--    let company = document.createElement("a")-->
+<!--    company.innerText = `${vacancy.author}`;-->
+<!--    div.append(name);-->
+<!--    div.append(salary);-->
+<!--    div.append(company);-->
+<!--    container.append(div);-->
+    container.append(
+        `<a href="">
+            <div class="card-body">
+                <h5 class="card-title">${vacancy.name}</h5>
+                <p>{{ v.category }}</p>
+                <p class="salary_text">{% load humanize %} ${vacancy.salary} KZT</p>
+                <p>Компания:
+                    <a class="company_title" href="">
+                        ${vacancy.author}
+                    </a>
+                </p>
+                <p class="udated_vacancy mt-1">
+                    Опубликовано: <span><b>${vacancy.updated_at}</b></span>
+                </p>
+            </div>
+        </a>`
+    )
 };
 
 renderResult = function (vacancies) {
