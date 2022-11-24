@@ -38,8 +38,8 @@
         <h3 class="vacancies_title">
             Вакансии
         </h3>
-        <div class="vacancies_list_block">
-            {% include 'partial/search.html' %}
+        {% include 'partial/search.html' %}
+        <div id="vacancies" class="vacancies_list_block">
             {% for v in vacancy %}
             <a href="{% url 'vacancy_detail' v.pk %}">
                 <div class="card-body">

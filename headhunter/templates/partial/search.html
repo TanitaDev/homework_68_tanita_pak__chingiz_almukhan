@@ -1,8 +1,57 @@
+<!--<form class="text-center" action="" method="GET">-->
+<!--    <label for="{{ form.search.id_for_label }}">{{ form.search.label }}:</label>-->
+<!--    {{ form.search }}-->
+<!--    {% for error in form.search.errors %}-->
+<!--    <p class="form-error">{{ error }}</p>-->
+<!--    {% endfor %}-->
+<!--</form>-->
+
+{% load static %}
+{% load django_bootstrap5 %}
 <form class="text-center" action="" method="GET">
-    <label for="{{ form.search.id_for_label }}">{{ form.search.label }}:</label>
-    {{ form.search }}
-    <input type="submit" value="Search">
-    {% for error in form.search.errors %}
-    <p class="form-error">{{ error }}</p>
-    {% endfor %}
+    {% bootstrap_form form %}
 </form>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
+</script>
+<script>
+let search = $("#id_search");
+let url = 'http://localhost:8000/api/vacancy?search='
+
+let addVacancy = function (vacancy, container) {
+    let div = document.createElement("div");
+    let name = document.createElement("h5");
+    name.innerText = `Name - ${vacancy.name}`;
+    let salary = document.createElement("p");
+    salary.innerText = `${vacancy.salary}`;
+    let company = document.createElement("a")
+    company.innerText = `${vacancy.company}`;
+    div.append(name);
+    div.append(salary);
+    div.append(company);
+    container.append(div);
+};
+
+renderResult = function (vacancies) {
+    let vacancy_container = $("#vacancies");
+    vacancy_container.empty();
+    for (let vacancy of vacancies) {
+      addVacancy(vacancy, vacancy_container);
+    }
+ };
+
+let getVacancies = function () {
+    let value = search.val()
+    $.ajax({
+        url: url + value
+    }).done(
+        function (data) {
+            console.log(data)
+            renderResult(data)
+        }
+    )
+}
+
+console.log(search);
+search.on('keyup', getVacancies);
+</script>
