@@ -10,4 +10,4 @@ def vacancy_list_view(request, *args, **kwargs):
     if request.method == "GET":
         search = request.GET.get('search')
         vacancy = Vacancy.objects.filter(name__icontains=search) if search else Vacancy.objects.all()
-        return JsonResponse(list(vacancy.values(*('name', 'salary', 'author'))), safe=False)
+        return JsonResponse(list(vacancy.values(*('id', 'name', 'salary', 'author', 'updated_at', 'category'))), safe=False)

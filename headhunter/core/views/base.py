@@ -15,7 +15,7 @@ from django.core.paginator import Paginator
 
 class IndexView(ListView):
     template_name = 'index.html'
-    paginate_by = 20
+    paginate_by = 3
     model = Vacancy
     context_object_name = 'vacancy'
     queryset = Vacancy.objects.filter(is_active=False).order_by('-updated_at')

@@ -1,11 +1,3 @@
-<!--<form class="text-center" action="" method="GET">-->
-<!--    <label for="{{ form.search.id_for_label }}">{{ form.search.label }}:</label>-->
-<!--    {{ form.search }}-->
-<!--    {% for error in form.search.errors %}-->
-<!--    <p class="form-error">{{ error }}</p>-->
-<!--    {% endfor %}-->
-<!--</form>-->
-
 {% load static %}
 {% load django_bootstrap5 %}
 <form class="text-center" action="" method="GET">
@@ -14,61 +6,4 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
 </script>
-<script>
-let search = $("#id_search");
-let url = 'http://localhost:8000/api/vacancy?search='
-
-let addVacancy = function (vacancy, container) {
-<!--    let div = document.createElement("div");-->
-<!--    let name = document.createElement("h5");-->
-<!--    name.innerText = `Name - ${vacancy.name}`;-->
-<!--    let salary = document.createElement("p");-->
-<!--    salary.innerText = `${vacancy.salary}`;-->
-<!--    let company = document.createElement("a")-->
-<!--    company.innerText = `${vacancy.author}`;-->
-<!--    div.append(name);-->
-<!--    div.append(salary);-->
-<!--    div.append(company);-->
-<!--    container.append(div);-->
-    container.append(
-        `<a href="">
-            <div class="card-body">
-                <h5 class="card-title">${vacancy.name}</h5>
-                <p>{{ v.category }}</p>
-                <p class="salary_text">{% load humanize %} ${vacancy.salary} KZT</p>
-                <p>Компания:
-                    <a class="company_title" href="">
-                        ${vacancy.author}
-                    </a>
-                </p>
-                <p class="udated_vacancy mt-1">
-                    Опубликовано: <span><b>${vacancy.updated_at}</b></span>
-                </p>
-            </div>
-        </a>`
-    )
-};
-
-renderResult = function (vacancies) {
-    let vacancy_container = $("#vacancies");
-    vacancy_container.empty();
-    for (let vacancy of vacancies) {
-      addVacancy(vacancy, vacancy_container);
-    }
- };
-
-let getVacancies = function () {
-    let value = search.val()
-    $.ajax({
-        url: url + value
-    }).done(
-        function (data) {
-            console.log(data)
-            renderResult(data)
-        }
-    )
-}
-
-console.log(search);
-search.on('keyup', getVacancies);
-</script>
+<script src=""></script>
